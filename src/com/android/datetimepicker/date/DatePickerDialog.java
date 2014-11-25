@@ -35,7 +35,6 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.android.datetimepicker.HapticFeedbackController;
 import com.android.datetimepicker.R;
 import com.android.datetimepicker.Utils;
 import com.android.datetimepicker.date.MonthAdapter.CalendarDay;
@@ -100,7 +99,6 @@ public class DatePickerDialog extends DialogFragment implements
     private Calendar mMinDate;
     private Calendar mMaxDate;
 
-    private HapticFeedbackController mHapticFeedbackController;
 
     private boolean mDelayAnimation = true;
 
@@ -268,20 +266,17 @@ public class DatePickerDialog extends DialogFragment implements
             }
         }
 
-        mHapticFeedbackController = new HapticFeedbackController(activity);
         return view;
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        mHapticFeedbackController.start();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        mHapticFeedbackController.stop();
     }
 
     private void setCurrentView(final int viewIndex) {
@@ -504,6 +499,5 @@ public class DatePickerDialog extends DialogFragment implements
 
     @Override
     public void tryVibrate() {
-        mHapticFeedbackController.tryVibrate();
     }
 }

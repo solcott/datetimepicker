@@ -35,7 +35,6 @@ import android.view.Window;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.android.datetimepicker.HapticFeedbackController;
 import com.android.datetimepicker.R;
 import com.android.datetimepicker.Utils;
 import com.android.datetimepicker.time.RadialPickerLayout.OnValueSelectedListener;
@@ -72,7 +71,6 @@ public class TimePickerDialog extends DialogFragment implements OnValueSelectedL
 
     private OnTimeSetListener mCallback;
 
-    private HapticFeedbackController mHapticFeedbackController;
 
     private TextView mDoneButton;
     private TextView mHourView;
@@ -215,12 +213,10 @@ public class TimePickerDialog extends DialogFragment implements OnValueSelectedL
         mAmText = amPmTexts[0];
         mPmText = amPmTexts[1];
 
-        mHapticFeedbackController = new HapticFeedbackController(getActivity());
-
         mTimePicker = (RadialPickerLayout) view.findViewById(R.id.time_picker);
         mTimePicker.setOnValueSelectedListener(this);
         mTimePicker.setOnKeyListener(keyboardListener);
-        mTimePicker.initialize(getActivity(), mHapticFeedbackController, mInitialHourOfDay,
+        mTimePicker.initialize(getActivity(), mInitialHourOfDay,
             mInitialMinute, mIs24HourMode);
 
         int currentItemShowing = HOUR_INDEX;
@@ -342,17 +338,14 @@ public class TimePickerDialog extends DialogFragment implements OnValueSelectedL
     @Override
     public void onResume() {
         super.onResume();
-        mHapticFeedbackController.start();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        mHapticFeedbackController.stop();
     }
 
     public void tryVibrate() {
-        mHapticFeedbackController.tryVibrate();
     }
 
     private void updateAmPmDisplay(int amOrPm) {
